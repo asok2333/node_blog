@@ -20,9 +20,30 @@ router.get('/register', function (req, res) {
     res.render('register.html')
 })
 
-router.post('/register', function (req, res) {
+router.post('/register', async function (req, res) {
     console.log(req.body)
     let body = req.body
+    try {
+        if (await User.findOne({ email: body.e,email })) {
+            return res.status(200).json({
+                code: 201,
+                msg: '邮箱已存在'
+            })
+        }
+        if (await User.findOne({ nickname: body.e,nickname })) {
+            return res.status(200).json({
+                code: 201,
+                msg: '用户名已存在'
+            })
+        }
+        body.password = md5(md5(body.password))
+        new User(body).save()
+    } catch (err) {
+        return res.status(500).json({
+            code: 500,
+            msg: err.message
+        })
+    }
     User.findOne({
         $or: [{
             email: body.email
