@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
- {{ name }}
-</body>
-</html>
+{{ extend './layout.html' }}
+{{ block 'head' }}
+<style>
+</style>
+{{ /block }}
+{{ block 'content' }}
+<div>index</div>
+{{ /block }}

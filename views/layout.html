@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    {{ block 'head' }}{{ /block }}
 </head>
 <body>
-$END$
+{{ include './header.html' }}
+{{ block 'content' }}
+    <h1>暂无数据</h1>
+{{ /block }}
+{{ include './footer.html' }}
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+{{ block 'script' }}{{ /block }}
 </body>
 </html>

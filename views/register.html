@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{{ extend './layout.html' }}
+{{ block 'head' }}
+<style>
+</style>
+{{ /block }}
+{{ block 'content' }}
+<h1>注册</h1>
+<form id="register_form">
+    <div class="form-group">
+        <label for="exampleInputEmail1">邮箱</label>
+        <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">昵称</label>
+        <input type="text" name="nickname" class="form-control" id="exampleInputText" placeholder="name">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">密码</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox">用户协议
+        </label>
+    </div>
+    <button type="submit" class="btn btn-default">注册 </button>
+    <a class="btn btn-default" href="login">登录</a>
+</form>
+{{ /block }}
+{{ block 'script' }}
+<script>
+    $('#register_form').on('submit', function (e) {
+        e.preventDefault()
+        var formData = $(this).serialize()
+        console.log(formData)
+        $.ajax({
+            url: '/register',
+            method: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code !== 200) {
+                    alert(data.msg)
+                }
+            }
+        })
+    })
+</script>
+{{ /block }}
